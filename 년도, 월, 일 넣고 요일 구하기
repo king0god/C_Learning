@@ -1,0 +1,38 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+int main() {
+	int year,month, date, day = 0, a = 0, b = 0;
+	char yuil[8][10] = { "Monday", "Tuesday","Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+	scanf("%d %d %d", &year, &month, &date);
+	for (int i = 1; i < year; i++){
+		if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0) {// 윤년
+			day++;
+		}
+	}
+	for (int i = 2; i < month; i++) {
+		if (i == 3 || i == 5 || i == 7 || i == 8 || i == 10 || i == 12) {
+			b = b + 31;
+		}
+		if (i == 2) {
+			b = b + 28;
+		}
+		if (i == 4 || i == 11 || i == 9 || i == 6) {
+			b = b + 30;
+		}
+	}
+	if (month > 1) {
+		b = b + 31;
+	}
+	for (int i = 0; i < day + (year-1 * 365) + b + date; i++) {
+		a++;
+		if (a == 7) {
+			a = 0;
+		}
+	}
+	if (year % 4 == 0 && year % 400 != 0 && year % 100) {// 윤년
+		a++;
+	}
+	printf("%s", yuil[a]);
+
+	return 0;
+}
